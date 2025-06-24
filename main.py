@@ -1,4 +1,5 @@
 import pygame
+import random
 
 #inicializar
 pygame.init()
@@ -6,12 +7,14 @@ pygame.init()
 nome = 'Victor'
 tamanho_tela = (800, 800)
 tela = pygame.display.set_mode(tamanho_tela)
+bg = pygame.image.load('img/bg3.png').convert()
+bg = pygame.transform.scale(bg, tamanho_tela)
 
 pygame.display.set_caption('Brick Breaker')
 
 #config bola
 tamanho_bola = 15
-bola = pygame.Rect(100, 500, tamanho_bola, tamanho_bola)
+bola = pygame.Rect(random.randint(10, 790),random.randint(400, 500), tamanho_bola, tamanho_bola)
 
 #config jogador
 tamanho_jogador = 100
@@ -87,6 +90,7 @@ def movimentar_bola(bola):
     return movimento
 
 def atualizar_pontuacao(pontuacao):
+    movimento = movimento_bola
     fonte = pygame.font.Font(None, 30)
     texto = fonte.render(f"Pontuação: {pontuacao}", 1, cores["amarelo"])
     tela.blit(texto, (640, 775))
@@ -101,8 +105,9 @@ def assinatura(nome):
 
 #desenhas coisas na tela
 def desenhar_inicio_jogo():
-    tela.fill(cores["preto"])
-    pygame.draw.rect(tela, cores["azul"], jogador)
+    tela.blit(bg, (0, 0))
+    #tela.fill(cores["preto"])
+    pygame.draw.rect(tela, cores["branco"], jogador)
     pygame.draw.rect(tela, cores["branco"], bola)
 
 def desenhar_blocos(blocos):
