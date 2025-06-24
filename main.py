@@ -3,6 +3,7 @@ import pygame
 #inicializar
 pygame.init()
 
+nome = 'Victor'
 tamanho_tela = (800, 800)
 tela = pygame.display.set_mode(tamanho_tela)
 
@@ -88,10 +89,15 @@ def movimentar_bola(bola):
 def atualizar_pontuacao(pontuacao):
     fonte = pygame.font.Font(None, 30)
     texto = fonte.render(f"Pontuação: {pontuacao}", 1, cores["amarelo"])
-    tela.blit(texto, ((640), 780))
+    tela.blit(texto, (640, 775))
     if pontuacao >= total_blocos:
         return True
     else: False
+
+def assinatura(nome):
+    fonte = pygame.font.Font(None, 20)
+    texto = fonte.render(f"by {nome}", 1, cores["branco"])
+    tela.blit(texto, (10, 775))
 
 #desenhas coisas na tela
 def desenhar_inicio_jogo():
@@ -109,6 +115,7 @@ blocos = criar_blocos(quant_blocos_linhas, quant_linhas_blocos)
 while not fim_jogo:
     desenhar_inicio_jogo()
     desenhar_blocos(blocos)
+    assinatura(nome)
     fim_jogo = atualizar_pontuacao(total_blocos - len(blocos))
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT:
