@@ -49,7 +49,7 @@ cores = {
 
 fim_jogo = False
 pontuacao = 0
-movimento_bola = [1, 1]
+movimento_bola = [1, -1]
 
 #criar as funcoes do jogo
 def movimentar_jogador(evento):
@@ -60,10 +60,25 @@ def movimentar_jogador(evento):
         if evento.key == pygame.K_LEFT:
             if jogador.x > 10:
                 jogador.x = jogador.x - 40
-    pass
 
-def movimentar_bola():
-    pass
+
+def movimentar_bola(bola):
+    movimento = movimento_bola
+    bola.x = bola.x + movimento[0]
+    bola.y = bola.y + movimento [1]
+
+    if bola.x <= 0:
+        movimento[0] = - movimento[0]
+    if bola.y <= 0:
+        movimento[1] = - movimento[1] 
+    if (bola.x + tamanho_bola) >= tamanho_tela[0]:
+        movimento[0] = - movimento[0]
+    if (bola.y + tamanho_bola) >= tamanho_tela[1]:
+        movimento[1] = - movimento[1]
+        #pygame.quit()
+
+
+    return movimento
 
 #desenhas coisas na tela
 def desenhar_inicio_jogo():
@@ -86,6 +101,7 @@ while not fim_jogo:
             fim_jogo = True
         movimentar_jogador(evento)
 
+    movimento_bola = movimentar_bola(bola)
     pygame.time.wait(1)
     pygame.display.flip()
 
