@@ -36,8 +36,7 @@ def criar_blocos(quant_blocos_linhas, quant_linhas_blocos):
             #criar o bloco
             bloco = pygame.Rect(i * (largura_bloco + distancia_blocos), j * distancia_linhas, largura_bloco, altura_bloco)
             #adicionar o bloco a lista
-            blocos.append(bloco)
-    
+            blocos.append(bloco)       
     return blocos
 
 cores = {
@@ -53,6 +52,18 @@ pontuacao = 0
 movimento_bola = [1, 1]
 
 #criar as funcoes do jogo
+def movimentar_jogador(evento):
+    if evento.type == pygame.KEYDOWN:
+        if evento.key == pygame.K_RIGHT:
+            if (jogador.x + tamanho_jogador) < (tamanho_tela[0] - 10):
+                jogador.x = jogador.x + 40
+        if evento.key == pygame.K_LEFT:
+            if jogador.x > 10:
+                jogador.x = jogador.x - 40
+    pass
+
+def movimentar_bola():
+    pass
 
 #desenhas coisas na tela
 def desenhar_inicio_jogo():
@@ -64,17 +75,16 @@ def desenhar_blocos(blocos):
     for bloco in blocos:
         pygame.draw.rect(tela, cores["verde"], bloco)
     
-desenhar_inicio_jogo()
 blocos = criar_blocos(quant_blocos_linhas, quant_linhas_blocos)
-desenhar_blocos(blocos)
 #criar um loop infinito
 
 while not fim_jogo:
+    desenhar_inicio_jogo()
+    desenhar_blocos(blocos)
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT:
             fim_jogo = True
-
-    
+        movimentar_jogador(evento)
 
     pygame.time.wait(1)
     pygame.display.flip()
