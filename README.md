@@ -3,7 +3,7 @@
 Um clássico jogo de **quebrar blocos** feito com Python e Pygame!
 
 <p align="center">
-  <img src="/img/img1.png" width="600" alt="Interface do Game"/>
+  <img src="/img/img2.png" width="600" alt="Interface do Game"/>
 </p>
 
 **Descrição:**  
